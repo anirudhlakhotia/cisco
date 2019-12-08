@@ -1,0 +1,101 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+        <nav class="navbar navbar-expand-sm bg-light navbar-light">
+                <div class="navbar-collapse collapse justify-content-between">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#">LOGO</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <a class="nav-item nav-link" [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >Dashboard</a>
+                  </ul>
+                 
+                  <div class="wrap">
+                    <div class="search">
+                      <input maxlength="32" type="text" class="searchTerm" placeholder="What are you looking for?" />
+                      <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="navbar-nav">
+                      <a class="nav-item nav-link" href="#" routerLink="/events">Events</a>
+                      <a class="nav-item nav-link" [routerLink]="['/achievements']" routerLinkActive="router-link-active" >Achievements</a>
+              
+                      <a class="nav-item nav-link" [routerLink]="['/signup2']" routerLinkActive="router-link-active">Add
+                        Interests</a>
+                      <a routerLink="/delete" class="nav-item nav-link">Settings</a>
+                      <a class="nav-item nav-link" [routerLink]="['/userprofile']" routerLinkActive="router-link-active">User Profile</a>
+                      <a class="nav-item nav-link"  routerLinkActive="router-link-active">
+                        <button class="btn btn-danger" (click)="logout()">Logout</button></a>
+                    </div>
+                </div>
+              </nav>
+
+
+    <div class="container">
+        <h1 style="text-align: center;">Discover Something New</h1>
+        <!-- Events searching below -->
+        <div class="events">
+            <h3>Search For New Events </h3>
+            <br>
+            <form #f="ngForm">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">What do you want to search for?</span>
+                    </div>
+                    <input type="text" placeholder="Search" class="form-control" required name="keyword" ngModel
+                        #keyword="ngModel" [(ngModel)]="data.selSearch.keyword">
+                    <span class="help-block" *ngIf="!keyword.valid && keyword.touched">Please enter Something to search
+                        for</span>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label class="control-label">Enter 1 for regular search, 2 for deep search or 3 for archive
+                        search</label>
+                    <div>
+                        <input type="number" min="1" max="3" placeholder="Choice" class="form-control" required
+                            name="usecase" ngModel #usecase="ngModel" [(ngModel)]="data.selSearch.usecase">
+                        <span class="help-block" *ngIf="!usecase.valid && usecase.touched">Please enter a use
+                            case</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary" [disabled]="!f.valid" (click)="onSubmit(f)">Submit Query</button>
+            </form>
+        </div>
+        <hr>
+        <hr>
+        <!-- User Searching Below -->
+        <div class="users">
+            <h3>Search For People You May Know</h3>
+            <br>
+            <form #g="ngForm">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Who do you want to search for?</span>
+                    </div>
+                    <input type="text" placeholder="Search" class="form-control" required name="userKey" ngModel
+                        #userKey="ngModel" [(ngModel)]="data.selSearch1.userKey">
+                    <span class="help-block" *ngIf="!userKey.valid && userKey.touched">Enter a search value</span>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label class="control-label">Enter 1 for regular search, 2 for deep search or 3 for archive
+                        search</label>
+                    <div>
+                        <input type="number" min="1" max="3" placeholder="Choice" class="form-control" required
+                            name="userUseCase" ngModel #userUseCase="ngModel" [(ngModel)]="data.selSearch1.userUseCase">
+                        <span class="help-block" *ngIf="!userUseCase.valid && userUseCase.touched">Please enter a use
+                            case</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary" [disabled]='!g.valid' (click)="onSubmit1(g)">Submit Query</button>
+            </form>
+        </div>
+    </div>
+</body>
